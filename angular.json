@@ -23,11 +23,14 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
-            ],
-            "scripts": [
+              "src/styles.css",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css"
+              ],
+              "scripts": [
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.min.js"
               
-            ],
+              ],
             "es5BrowserSupport": true
           },
           "configurations": {
@@ -83,8 +86,11 @@
             "karmaConfig": "src/karma.conf.js",
             "styles": [
               "src/styles.css"
+             
             ],
-            "scripts": [],
+            "scripts": [
+             
+            ],
             "assets": [
               "src/favicon.ico",
               "src/assets"
