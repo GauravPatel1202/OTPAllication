@@ -1,0 +1,11 @@
+<div style="text-align:center">
+    <form [formGroup]="OtpForm">
+        <div >
+           <input id="codeBox1" type="number" formControlName="OtpForm1"  (keyup)="onKeyUpEvent(1, $event)" (focus)="onFocusEvent(1)"/>
+          <input id="codeBox2" type="number" formControlName="OtpForm2"  (keyup)="onKeyUpEvent(2, $event)" (focus)="onFocusEvent(2)"/>
+          <input id="codeBox3" type="number" formControlName="OtpForm3"  (keyup)="onKeyUpEvent(3, $event)" (focus)="onFocusEvent(3)"/>
+          <input id="codeBox4" type="number" formControlName="OtpForm4"  (keyup)="onKeyUpEvent(4, $event)" (focus)="onFocusEvent(4)"/>
+        </div>
+      </form>
+ 
+</div>

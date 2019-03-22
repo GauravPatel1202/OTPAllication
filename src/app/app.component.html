@@ -1,13 +1,4 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-    <form [formGroup]="OtpForm">
-        <div >
-           <input id="codeBox1" type="number" formControlName="OtpForm1" maxlength="1" (keyup)="onKeyUpEvent(1, $event)" (focus)="onFocusEvent(1)"/>
-          <input id="codeBox2" type="number" formControlName="OtpForm2" maxlength="1" (keyup)="onKeyUpEvent(2, $event)" (focus)="onFocusEvent(2)"/>
-          <input id="codeBox3" type="number" formControlName="OtpForm3" maxlength="1" (keyup)="onKeyUpEvent(3, $event)" (focus)="onFocusEvent(3)"/>
-          <input id="codeBox4" type="number" formControlName="OtpForm4" maxlength="1" (keyup)="onKeyUpEvent(4, $event)" (focus)="onFocusEvent(4)"/>
-        </div>
-         <div  (click)="onSubmit()" type="submit" *ngIf="OtpForm.valid">{{OtpForm.value.OtpForm1}}{{OtpForm.value.OtpForm2}}{{OtpForm.value.OtpForm3}}{{OtpForm.value.OtpForm4}}</div>
-      </form>
- 
-</div>
+<app-header></app-header>
+<router-outlet></router-outlet>
+<app-footer></app-footer>

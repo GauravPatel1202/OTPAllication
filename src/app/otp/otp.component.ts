@@ -1,16 +1,20 @@
-import { Component , ElementRef, ViewChild} from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild} from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { FormArray } from '@angular/forms';
-
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: 'app-otp',
+  templateUrl: './otp.component.html',
+  styleUrls: ['./otp.component.css']
 })
-export class AppComponent {
+export class OtpComponent implements OnInit {
+
   constructor(private fb: FormBuilder) { }
+
+  ngOnInit() {
+  }
+ 
   OtpForm = this.fb.group({
     OtpForm1: ['',(Validators.required,Validators.maxLength(1))],
     OtpForm2: ['',Validators.required],
@@ -54,4 +58,5 @@ export class AppComponent {
     // TODO: Use EventEmitter with form value
     console.log(this.OtpForm.value);
   }
+
 }
