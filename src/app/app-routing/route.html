@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>router</title>
+  <script>
+    (function(){
+      var cache = {};
+      this.tmpl = function tmpl(str, data){
+        var fn = !/\W/.test(str) ?
+          cache[str] = cache[str] ||
+            tmpl(document.getElementById(str).innerHTML) :
+          
+          new Function("obj",
+            "var p=[],print=function(){p.push.apply(p,arguments);};" +
+            "with(obj){p.push('" +
+            str
+              .replace(/[\r\t\n]/g, " ")
+              .split("<%").join("\t")
+              .replace(/((^|%>)[^\t]*)'/g, "$1\r")
+              .replace(/\t=(.*?)%>/g, "',$1,'")
+              .split("\t").join("');")
+              .split("%>").join("p.push('")
+              .split("\r").join("\\'")
+          + "');}return p.join('');");
+        return data ? fn( data ) : fn;
+      };
+    })();
+    var routes = {};
+    //
+    function route (path, templateId, controller) {
+      routes[path] = {templateId: templateId, controller: controller};
+    }
+    var el = null;
+    function router () {
+	el = el || document.getElementById('view');
+	var url = location.hash.slice(1) || '/';
+       
+        var route = routes[url];
+      
+        if (el && route.controller) {
+        
+            el.innerHTML = tmpl(route.templateId, new route.controller());
+        }
+    }
+   
+    window.addEventListener('hashchange', router);
+   
+    window.addEventListener('load', router);
+  </script>
+  <script type="text/html" id="home">
+    <h1>Router!</h1>
+  </script>
+  <script type="text/html" id="template1">
+    <h1>Page 1: <%= greeting %></h1>
+    <p><%= moreText %></p>
+	<p>Page 1...</p>
+  </script>
+  <script type="text/html" id="template2">
+  <h1>Page 1: <%= greeting %></h1>
+    <p>Page 2: <%= heading %></p>
+    <p>Page 2...</p>
+  </script>
+</head>
+<body>
+  <ul>
+    <li><a href="#">Home</a></li>
+    <li><a href="#/page1">Page 1</a></li>
+    <li><a href="#/page2">Page 2</a></li>
+  </ul>
+  <div id="view"></div>
+  <script>
+    route('/', 'home', function () {});
+    route('/page1', 'template1', function () {
+        this.greeting = 'Hello world! page1';
+        this.moreText = 'Bacon ipsum...';
+    });
+    route('/page2', 'template2', function () {
+	  this.greeting = 'Hello world! page2';
+      this.heading = 'I\'m page two!';
+    });
+  </script>
+</body>
+</html>
